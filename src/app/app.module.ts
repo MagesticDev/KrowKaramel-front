@@ -5,10 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ErrorsModule } from './components/pages/errors/app-errors.module';
-import { AccountModule } from './components/pages/account/app-account.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { AdminModule } from './components/pages/_admin/app-admin.module';
 import { AppRoutingModule } from './app-routing.module'; 
 
 
@@ -26,9 +23,9 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AccountModule,
-    AdminModule,
-    ErrorsModule,
+    // AccountModule,
+    // AdminModule,
+    // ErrorsModule,
     IonicStorageModule.forRoot()
   ],
   declarations: [
