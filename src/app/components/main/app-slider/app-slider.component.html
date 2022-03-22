@@ -1,0 +1,31 @@
+<div class="app-slider">
+  <div *ngIf="getSlider" id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="reflect"></div>
+    <ol class="carousel-indicators mb-0">
+      <li *ngFor="let slider of getSlider; let i = index" data-bs-target="#carouselCaptions" attr.data-bs-slide-to="{{i}}" class="{{ (i == 0) ? 'active' : '' }}"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div *ngFor="let slider of getSlider; let i = index" class="carousel-item {{ (i == 0) ? 'active' : '' }}">
+        <img class="d-block w-100 img-slide" data-src="" alt="" src="{{slider?.url}}" data-holder-rendered="true">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>{{slider?.title}}</h5>
+          <p>
+              {{slider?.description}}
+          </p>
+          <div *ngIf="slider?.btn_link" class="d-flex justify-content-center align-items-center">
+            <a class="btn btn-success btn-custom" routerLink="/{{slider?.btn_link}}">{{slider?.btn_text}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,53 @@
+.ticket-view {
+    :focus {
+        outline: none !important;
+        position: relative;
+        &:after {
+            position: absolute;
+            content:"";
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border: 2px solid rgba(231,76,60,40%) !important;
+        }
+    }
+
+    & img.avatar-full {
+        width: 100px;
+        height: 100px;
+        display: block;
+        -o-object-fit: cover;
+        object-fit: cover;
+        background: #1a1a1d;
+        padding: 1px;
+        border: 1px solid #121621 !important;
+    }
+
+    & .ticket-rank-author {
+        padding: 10px;
+        border: solid 1px #151924;
+        background: #25272f;
+    }
+
+    & .pan {
+        background:#1a1a1d;
+        padding:5px;
+        & img {
+            border: 1px solid  #121621;
+        }
+    }
+
+    & .avatar-min {
+        width:35px;
+        height:35px;
+    }
+
+    & .border-start {
+        border-left: 1px #21232a solid !important;
+    }
+
+    & .border {
+        border: 1px solid  #121621 !important;
+    }
+}

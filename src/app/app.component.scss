@@ -1,0 +1,145 @@
+
+#content {
+    width: 100%;
+    padding: 20px 20px 45px 20px;
+    min-height: 100vh;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.3s;
+    & app-header {
+        width:100%;
+        position:sticky;
+        top:0;
+        z-index:1000;
+    }
+    & app-login {
+        z-index:10000;
+    }
+    & .page {
+        width:90%;
+    }
+}
+
+#aside {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    align-self: flex-start;
+    height:100vh;
+    box-shadow: 0px 0px 12px 0px #4971a6;
+    z-index: 1000;
+}
+
+::ng-deep .btn {
+    color:#eee !important;
+}
+
+::ng-deep .input-group-text {
+    background:#282c35;
+    border: 1px solid #11141d; 
+    color:#eee;
+}
+
+::ng-deep .form-group {
+    color:#1b3a63;
+    background:unset;
+}
+
+::ng-deep fieldset {
+    border: 1px solid #11141d; 
+    padding: 15px;
+    position: relative;
+    margin:20px 0;
+
+    & .title {
+        position: absolute;
+        top:-13px;
+        left:20px;
+        font-size:14px;
+        padding:0 10px;
+        background:#2b2f39;
+        & i {
+            color:#eee;
+        }
+    }
+}
+
+::ng-deep .modal-content {
+    background-color: #dedede;
+    border: 1px solid #4971a6; 
+    // color: #1b3a63 !important;
+    & .modal-header {
+        background: #1b3a63;
+        background-image: url("../assets/images/style/always-grey.png");
+        border-bottom: solid 1px #4971a6;
+        border-radius: unset;
+        color:#fff;
+        & h5 {
+            color:#fff;
+        }
+    }
+
+    & .modal-footer {
+        background: #1b3a63;
+        border-top: solid 1px #4971a6;
+        border-radius: unset;
+    }
+}
+
+::-webkit-input-placeholder {
+    color: #eee !important;
+    font-size: 13px;
+}
+
+::ng-deep ::-moz-placeholder {
+    color: #eee !important;
+    font-size: 13px;
+}
+
+::ng-deep :-ms-input-placeholder {
+    color:  #eee !important;
+    font-size: 13px;
+}
+
+::ng-deep ::placeholder {
+    color:  #eee !important;
+    font-size: 13px;
+}
+
+::ng-deep textarea {
+    background-color: #25272f;
+    border: 1px solid #121621;
+    color:#eee;
+    padding: 5px;
+    outline:0;
+}
+
+::ng-deep .list-group-item {
+    background-color: #4971a6;
+    // border: 1px solid #1b3a63;
+    // margin-top:1px;
+    color:#fff;
+}
+
+.footer {
+    left:0;
+    bottom:0;
+    z-index:0;
+    width:100%;
+}
+
+::ng-deep .form-control, ::ng-deep .form-control:focus {
+    background-color: #1b3a63;
+    color: #eee;
+    border: 1px solid #4971a6;
+}
+
+.tchat {
+    width:100px;
+    height:35px;
+    background:#212529;
+    position:fixed;
+    right:0;
+    bottom:0;
+}

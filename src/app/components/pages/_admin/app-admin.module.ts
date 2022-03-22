@@ -23,6 +23,7 @@ import { ColorSketchModule } from 'ngx-color/sketch';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomRouteReuseStrategy } from 'src/app/core/utils/customReuseRouteStrategy';
 import { AdminPageModule } from './page-builder/app-admin-page.module';
+import { AdminEmailModule } from './email/app-admin-email.module';
 
 // import { AuthGuardService } from 'src/app/core/services/authGuard.service';
 
@@ -49,6 +50,7 @@ import { AdminPageModule } from './page-builder/app-admin-page.module';
     TextBoxAllModule,
     ColorSketchModule,
     AdminPageModule,
+    AdminEmailModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

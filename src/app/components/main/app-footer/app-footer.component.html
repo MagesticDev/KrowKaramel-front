@@ -1,0 +1,12 @@
+<app-error></app-error>
+<footer>
+    <div class="footer mt-4">
+        <span>© {{ main.dateStartWebsite }} - {{ year }} {{ main.copyright }}.</span>
+        <span *ngIf="main?.facebook || main?.twitter || main?.youtube || main?.linkedin" class="ms-2 social">
+            <a *ngIf="main?.facebook" (click)="openUrl($event)" href="{{ main.facebook }}" title="{{ main.facebook_desc }}"><i class="fab fa-facebook-square"></i></a>
+            <a *ngIf="main?.twitter" (click)="openUrl($event)" href="{{ main.twitter }}" title="{{ main.twitter_desc }}"><i class="fab fa-twitter-square"></i></a>
+            <a *ngIf="main?.youtube" (click)="openUrl($event)" href="{{ main.youtube }}" title="{{ main.youtube_desc }}"><i class="fab fa-youtube-square"></i></a>
+            <a *ngIf="main?.youtube" (click)="openUrl($event)" href="{{ main.linkedin }}" title="{{ main.linkedin_desc }}"><i class="fab fa-linkedin"></i></a>
+        </span>
+    </div>
+</footer>

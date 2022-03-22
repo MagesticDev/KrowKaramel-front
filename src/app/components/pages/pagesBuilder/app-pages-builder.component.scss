@@ -1,0 +1,9 @@
+.custom-page {
+    min-height:100vh;
+    & .description {
+        color:#4971a6;
+        & .fa-arrow-alt-square-right {
+            color:#1b3a63;
+        }
+    }
+}

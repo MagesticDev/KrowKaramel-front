@@ -1,0 +1,12 @@
+.head-email-box {
+    background: #1b3a63;
+    & i {
+      color:#ffffff;  
+    }  
+}
+
+.list-group-item {
+    &:hover {
+        color: #ffffff;
+    }
+}

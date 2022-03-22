@@ -1,0 +1,29 @@
+<app-loading [hasLoading]="hasLoading"></app-loading>
+<section class="email">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 mt-4 mb-4 bg-span">
+        <div class="title w-100 d-flex justify-content-between align-items-center">
+            <h1 class="w-100 m-0"><i class="fas fa-feather-alt"></i> Boîte mail</h1>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-3">
+                <h3 class="panel-title mt-2">Inbox</h3>
+                <div class="panel panel-default p-0  m-t-20">
+                    <div class="panel-body p-0">
+                        <div class="list-group no-border mail-list" *ngFor="let folder of folders">
+                            <a href="#" routerLink="/Email/folder/{{folder['name']}}" routerLinkActive="active"
+                                [ngClass]="{'head-email-box': folder['folders']}" class="list-group-item"><i
+                                    class="fas fa-chevron-circle-right"></i>{{folder?.name}}</a>
+                            <div *ngFor="let subFolder of folder['folders']">
+                                <a href="#" routerLink="/Email/folder/{{subFolder[1]}}" routerLinkActive="active"
+                                    class="list-group-item ps-4"><i class="fas fa-share"></i>{{subFolder[1]}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>

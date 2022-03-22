@@ -1,0 +1,58 @@
+<div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid justify-content-between">
+            <button (click)="toggle()" type="button" id="sidebarCollapse" class="btn-info custom-button">
+                <i class="fas fa-align-left"></i>
+            </button>
+            <div>
+                <div *ngIf="!isLoggedIn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Login">
+                    <span class="d-flex align-items-center">
+                        <i class="fas fa-sign-in-alt me-2"></i>
+                        {{ 'account.login.connection' | translate}}
+                    </span>
+                    <div class="back"></div>
+                </div>
+                
+                <div *ngIf="isLoggedIn" class="account">
+                    <img class="avatar" src="{{accountDetail?.avatar}}" />
+                    <ul class="navbar-nav me-auto ms-2">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{accountDetail?.login}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ng-container *ngIf="accountDetail?.hasAdmin">
+                                    <a class="dropdown-item d-flex align-items-center text-danger" routerLink="/Administration">
+                                        <i class="fas fa-cogs me-2"></i>
+                                        Administration
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                </ng-container>
+                                <a class="dropdown-item d-flex align-items-center" routerLink="/Account">
+                                    <i class="fas fa-user me-2"></i>
+                                    {{ 'account.member.account' | translate}}
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#" routerLink="/Messaging">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    {{ 'account.member.messaging' | translate}}
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#" routerLink="/Support">
+                                    <i class="fas fa-ticket-alt me-2"></i>
+                                    {{ 'account.member.support' | translate}}
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <div (click)="logout()" class="btn btn-danger">
+                                    <span class="d-flex align-items-center">
+                                        <i class="fas fa-power-off me-2"></i>
+                                        {{ 'account.member.disconnect' | translate}}
+                                    </span>
+                                    <div class="back"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

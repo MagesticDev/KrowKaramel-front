@@ -1,2 +1,16 @@
 <noscript>Votre navigateur ne supporte pas javascript!</noscript>
-<router-outlet></router-outlet>
+<div class="wrapper">
+    <app-aside *ngIf="main" [main]="main" [modules]="modules" id="aside" [isLoggedIn]="isLoggedInOk"></app-aside>
+    <div id="content">
+        <app-header [isLoggedIn]="isLoggedInOk"  [accountDetail]="accountDetail" (isLogged)="isLoggedIn($event)"></app-header>
+        <div class="page">
+            <app-breadcrumb></app-breadcrumb>
+            <app-popup-alert></app-popup-alert>
+            <router-outlet [isLoggedIn]="isLoggedInOk">
+            </router-outlet>
+        </div>
+        <app-footer *ngIf="main" [main]="main" class="footer"></app-footer>
+    </div>
+    <app-login (isLogged)="isLoggedIn($event)" *ngIf="!isLoggedInOk"></app-login>
+    <app-tchat *ngIf="tchatActive" [LoggedInOk]="isLoggedInOk"></app-tchat>
+</div>

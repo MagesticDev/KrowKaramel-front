@@ -1,0 +1,35 @@
+<div>
+    <section *ngIf="page?.content" class="custom-page">
+        <div #screen>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 mt-4 mb-4 bg-span">
+                <div class="title w-100 justify-content-between flex-column">
+                    <div [ngClass]="{'justify-content-between': page?.hasHeader, 'justify-content-end': !page?.hasHeader}" class="title w-100 d-flex justify-content-between align-items-center">
+                        <h1 class="w-100 m-0" *ngIf="page?.hasHeader"><i class="fas fa-feather-alt"></i> {{page?.title}}</h1>
+                        <div *ngIf="hasAdmin" class="btn btn-success m-0" (click)="capture()">
+                            <span class="d-flex align-items-center">
+                                <i class="fas fa-image me-2"></i>
+                                Créer une capture
+                            </span>
+                            <div class="back"></div>
+                        </div>
+                        <a *ngIf="page?.documents.length > 0" class="btn btn-primary m-0 ms-1" data-bs-toggle="offcanvas"
+                            href="#offCanvasPageBuilder" role="button" aria-controls="offCanvasPageBuilder">
+                            <span class="d-flex align-items-center">
+                                <i class="fas fa-file me-2"></i>
+                                Documents
+                            </span>
+                            <div class="back"></div>
+                        </a>
+                    </div>
+                    <h2 *ngIf="page?.hasHeader" class="w-100 mt-3 description"><i class="far fa-arrow-alt-square-right"></i>
+                        {{page?.description}} </h2>
+                </div>
+            </div>
+            <div class="w-100" [ngStyle]="custom_css" [innerHTML]="removeBackslashes(page?.content)">
+            </div>
+        </div>
+    </section>
+</div>
+<app-offcanvas [options]="offcanvasConfig" *ngIf="page?.documents.length > 0">
+    <app-files-list [files]="page?.documents"></app-files-list>
+</app-offcanvas>
