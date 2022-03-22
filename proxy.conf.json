@@ -1,6 +1,6 @@
 {
     "/api/*": {
-      "target": "http://magestic-api.test",
+      "target": "http://workshop.test",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true
