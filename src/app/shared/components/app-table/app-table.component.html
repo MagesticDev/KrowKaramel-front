@@ -1,0 +1,73 @@
+<div class="mt-4 ms-0 me-0">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-wrap">
+                <table class="table table-responsive-xl" mdbTable>
+                    <thead>
+                        <tr>
+                            <th>
+                                <label class="checkbox-wrap checkbox-primary mb-0 pb-0">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </th>
+                            <th *ngFor="let column of columns; let i = index" class="click-sort" [appSort]="data"
+                                [attr.data-name]="filterColumns[i]">
+                                {{column}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr role="alert" *ngFor="let data of dataFilter; let i = index">
+                            <td>
+                                <label class="checkbox-wrap checkbox-primary">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td *ngFor="let column of filterColumns">
+                                <div *ngIf="column === 'created_date'">
+                                    <span>{{ created_date(data[column]) }}</span>
+                                </div>
+                                <div *ngIf="column === 'capture'" style="height:60px">
+                                    <div *ngIf="data[column]; else noImage">
+                                        <app-image-magnifier [imageInput]="apiUrl + '/' + data[column]">
+                                        </app-image-magnifier>
+                                    </div>
+                                    <ng-template #noImage>
+                                        <div class="border text-center p-2">
+                                            Image not found
+                                        </div>
+                                    </ng-template>
+                                </div>
+                                <div *ngIf="column === 'path'">
+                                    <a routerLink="/{{data[column]}}">{{ data[column] }}</a>
+                                </div>
+                                <div *ngIf="column === 'is_published'">
+                                    <span [innerHTML]="is_published(data[column])"></span>
+                                </div>
+                                <div>
+                                    <span> {{ filteredColumn(data[column], column) }} </span>
+                                </div>
+                                <div *ngIf="column === 'actions'">
+                                    <div class="btn btn-success" [routerLink]=" currentUrl + 'Edit/' + data['page_id']">
+                                        <span>
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <div class="back"></div>
+                                    </div>
+                                    <div class="btn btn-danger" [routerLink]=" currentUrl + 'Delete/' + data['page_id']">
+                                        <span>
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <div class="back"></div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

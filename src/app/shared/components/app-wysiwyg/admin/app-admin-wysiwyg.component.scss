@@ -1,0 +1,37 @@
+.editor-page {
+    ::ng-deep .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+        border: unset;
+    }
+
+    ::ng-deep .ck.ck-editor__main > .ck-editor__editable {
+        background: unset; 
+        font-size:15px !important;
+        & h1 {
+            color:#1b3a63 !important;
+        }
+    }
+
+    ::ng-deep .ck.ck-splitbutton.ck-splitbutton_open>.ck-button:not(.ck-on):not(.ck-disabled):not(:hover), .ck.ck-splitbutton:hover>.ck-button:not(.ck-on):not(.ck-disabled):not(:hover) {
+        background:#375c8d;
+        color:#FFFFFF;
+    }
+
+    ::ng-deep .ck.ck-editor__main > .ck-editor__editable p {
+        color: unset !important;
+    }
+
+    ::ng-deep .ck.ck-editor__main>.ck-editor__editable.ck-focused {
+        border: none;
+        box-shadow: none;
+    }
+
+    ::ng-deep .ck.ck-editor__main>.ck-editor__editable {
+        & p, & h1, & h2, & h3, & h4, & h5, & h6 {
+            color: #1b3a63 !important;
+        }
+    }
+
+    ::ng-deep .ck.ck-editor__editable > .ck-placeholder::before {
+        color: gray;
+    }
+}

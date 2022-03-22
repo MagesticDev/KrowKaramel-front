@@ -1,0 +1,97 @@
+::ng-deep .ck.ck-toolbar {
+    background: #1b3a63;
+    border:solid 1px #333333;
+    border-radius:0px;
+    & .ck.ck-button.ck-on {
+        background:#375c8d;
+        color:#FFFFFF;
+    }
+    & .ck.ck-icon, & .ck.ck-icon *, & .ck.ck-button.ck-off {
+        color: #eee;
+        cursor:pointer;
+
+        &:hover{
+            background:#375c8d;
+            color:#FFFFFF;
+        }
+    }
+    
+    /* padding: 0 var(--ck-spacing-small);
+    border: 1px solid var(--ck-color-toolbar-border); */
+}
+
+::ng-deep .ck.ck-dropdown__panel { 
+    background:#375c8d;
+    color:#ffffff;
+    border-color: #1b3a63;
+    & .ck.ck-form__header, & .ck.ck-character-info {
+        border-color: #1b3a63;
+        & .ck-form__header__label, & .ck-character-info__name, & .ck-character-info__code {
+            color:#ffffff;
+        }
+    }
+}
+
+::ng-deep .ck.ck-input-text {
+    background: #1b3a63;
+    border: 1px solid #1b3a63;
+    color:#ffffff;
+    &:focus {
+        outline:none;
+        box-shadow: none;
+    }
+}
+
+::ng-deep .ck-insert-table-dropdown__label, ::ng-deep .ck.ck-reset_all * {
+    color:#ffffff;
+}
+
+::ng-deep .ck.ck-labeled-field-view>.ck.ck-labeled-field-view__input-wrapper>.ck.ck-label  {
+    background: #1b3a63;
+}
+
+::ng-deep.ck.ck-splitbutton:hover>.ck-splitbutton__arrow:not(:hover) {
+    background-color: #1b3a63!important;
+}
+ 
+::ng-deep.ck.ck-splitbutton:hover>.ck-splitbutton__action:not(:hover) {
+    background-color: #1b3a63!important;
+}
+
+::ng-deep .ck.ck-form__row.ck-image-insert-form__action-row .ck-button .ck-button__label, ::ng-deep .ck.ck-labeled-field-view.ck-disabled>.ck.ck-labeled-field-view__input-wrapper>.ck.ck-label, .ck.ck-labeled-field-view.ck-labeled-field-view_empty:not(.ck-labeled-field-view_focused)>.ck.ck-labeled-field-view__input-wrapper>.ck.ck-label  {
+    color:#ffffff;
+}
+
+::ng-deep .ck.ck-list {
+    background: #1b3a63;
+}
+
+
+::ng-deep .ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, 
+.ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners,
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, 
+.ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
+    border-radius:unset;
+}
+
+::ng-deep .ck.ck-editor__main>.ck-editor__editable {
+    background: #375c8d;
+    & p, & h1, & h2, & h3, & h4, & h5, & h6 {
+        color:#ffffff !important;
+    }
+    border:1px solid #1b3a63;
+}
+
+
+::ng-deep .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border:1px solid #1b3a63;
+}
+
+::ng-deep .ck.ck-editor__editable > .ck-placeholder::before {
+    color: #ffffff;
+}
+
+:root {
+    --ck-z-default: 2000;
+ }
+

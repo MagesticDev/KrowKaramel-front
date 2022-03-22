@@ -1,0 +1,28 @@
+<div id="tabs" #tabs class="position-relative">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <button class="nav-link active" href="#base" data-bs-toggle="tab">Information</button>
+        </li>
+        <li class="nav-item btn-editor">
+            <button class="nav-link" href="#editor" data-bs-toggle="tab" [disabled]="!informationsOk || is_not_saved">Editeur</button>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="base">
+            <app-edit-page-informations [hasEdit]="hasEdit" [page]="page" (validateInformations)="validateInformations($event)"></app-edit-page-informations>
+        </div>
+        <form class="tab-pane" id="editor" [formGroup]="editForm" (ngSubmit)="edit(editForm)">
+            <button type="submit" class="btn btn-success ms-0 mt-3 position-absolute top-0 right-0" [disabled]="!editForm.valid || editForm.dirty">
+                <span class="d-flex align-items-center">
+                    <i class="fas fa-check me-2"></i>
+                    sauvegarder
+                </span>
+                <div *ngIf="editForm.valid" class="back"></div>
+            </button>
+            <app-offcanvas [options]="offcanvasConfig">
+                <app-template-editor></app-template-editor>
+            </app-offcanvas>
+            <app-admin-wysiwyg  (wysiwyg)="editChange($event)" *ngIf="page" [editorPageBuilder]="true" [content]="content"></app-admin-wysiwyg>
+        </form>
+    </div>
+</div>

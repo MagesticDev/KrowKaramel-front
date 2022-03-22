@@ -1,0 +1,119 @@
+<div *ngIf="allHistory" class="m-0 mt-1">
+    <div *ngIf="historyList">
+        <div class="title w-100 d-flex justify-content-between align-items-center">
+            <h3><i class="fas fa-feather-alt"></i> Historique du compte utilisateur</h3> 
+            <button class="btn btn-danger m-0 mb-1" [disabled]="!hasCheckedHistory" (click)="deleteHistoryDay()">
+                <span>Supprimer </span><div *ngIf="hasCheckedHistory" class="back"></div>
+            </button> 
+        </div>
+        <div class="w-100"> 
+            
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0" *ngFor="let history of historyList; let i = index"> 
+                <div *ngIf="(Date | date:'dd/MM/yyyy') === (history.date | date:'dd/MM/yyyy') && i === 0; else oldDateTpl">
+                    <div class="w-100 bg-warehouse border p-2 d-flex justify-content-center">
+                        <h4>
+                            Aujourd'hui  
+                        </h4> 
+                    </div>
+                    <ng-container *ngTemplateOutlet="row; context: {'historySelected' : (history.date | date:'yyyy-MM-dd')}"></ng-container>
+                </div>
+                <ng-template #oldDateTpl>
+                    <div *ngIf="this.oldDate && (Date | date:'dd/MM/yyyy') > (history.date | date:'dd/MM/yyyy') && this.oldDate != daysBetween(history.date)">
+                        <div class="w-100 bg-warehouse border p-2 d-flex justify-content-center mt-3">
+                            <h4>
+                                Il y'à {{daysBetween(history.date)}} 
+                                <span *ngIf="daysBetween(history.date) === '1'; else days">jour</span>
+                                <ng-template #days>jours</ng-template>
+                            </h4>
+                        </div>
+                        <ng-container *ngTemplateOutlet="row; context: {'historySelected' : (history.date | date:'yyyy-MM-dd')}"></ng-container>
+                    </div>
+                </ng-template>
+
+                <ng-template let-historySelected="historySelected" #row>
+                    <div class="row p-0 pt-2 pb-2 bg-warehouse border w-100 m-0 p-2">
+                        <strong class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                            <i class="fab fa-typo3"></i> Libellé
+                        </strong>
+                        <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            <i class="fas fa-exclamation-circle"></i> Action
+                        </strong>
+                        <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            <i class="far fa-clock"></i> Date
+                        </strong>
+                        <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                            <i class="fas fa-globe"></i> IP
+                        </strong>
+                        <strong class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAllHistory(historySelected)">
+                        </strong>
+                    </div>
+                </ng-template>
+                
+                
+                
+               
+                <div class="row bg-warehouse border align-items-center m-0 p-2">
+                    <div class="col-xl-2 col-lg-2 col-md-2 d-flex col-sm-2 d-col-block align-items-center mt-1 mb-1">
+                        {{ history?.libelle }}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ history?.action }}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ history?.date | date:'medium' }}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ history?.ip }}
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-12 d-flex d-col-block align-items-center mt-1 mb-1">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="history.isSelected" value="{{history.id}}" (change)="isAllSelectedHistory()">
+                    </div>
+                </div>
+            
+            <!-- END LISTE -->
+            </div>
+        </div>
+    </div>  
+    <div *ngIf="attempts_hackList" class="mt-5">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 mb-2">
+            <h3><i class="far fa-arrow-alt-square-right"></i> Attempts</h3> 
+        </div>
+        <div class="w-100">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-none d-md-flex d-lg-flex d-xl-flex d-sm-flex p-0 mt-4">
+                <div class="row p-0 pt-2 pb-2 bg-warehouse border w-100 m-0 p-0">
+                    <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                        <i class="fab fa-typo3"></i> Libellé
+                    </strong>
+                    <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                        <i class="fas fa-exclamation-circle"></i> Page
+                    </strong>
+                    <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                        <i class="far fa-clock"></i> Date
+                    </strong>
+                    <strong class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                        <i class="fas fa-globe"></i> IP
+                    </strong>
+                </div>
+            </div>
+            <!-- BEGIN LISTE -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0" *ngFor="let attempts_hack of attempts_hackList"> 
+                <div class="row bg-warehouse border align-items-center m-0 p-0">
+                    <div class="col-xl-3 col-lg-3 col-md-3 d-flex col-sm-3 d-col-block align-items-center mt-1 mb-1" [innerHTML]="attempts_hack?.description">
+                        
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ attempts_hack?.page }}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ attempts_hack?.date  | date:'medium' }}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 d-flex d-col-block align-items-center mt-1 mb-1">
+                        {{ attempts_hack?.ip }}
+                    </div>
+                </div>
+            </div>
+            <!-- END LISTE -->
+        </div>
+    </div>    
+</div>

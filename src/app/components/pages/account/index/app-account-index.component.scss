@@ -1,0 +1,11 @@
+$boxchadow: 0px 12px 20px 0px rgba(0, 0, 0, 35%);
+.account {
+    & .list-group {
+        box-shadow: $boxchadow;
+    }
+    & .right { 
+        & .bg-warehouse {
+            box-shadow: $boxchadow;
+        }
+    }
+}

@@ -1,0 +1,65 @@
+<app-breadcrumb></app-breadcrumb>
+<!-- BEGIN IF_IS_CONNECTE -->
+<app-loading [hasLoading]="hasLoading"></app-loading>
+
+<section class="account" *ngIf="account; else isNotLogged">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0 mt-4 mb-4 bg-span">
+        <div class="title w-100 d-flex justify-content-between align-items-center">
+            <h1 class="w-100 m-0"><i class="fas fa-feather-alt"></i> Mon compte</h1>
+        </div>
+        <hr />
+        <div class="row mt-2">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 pb-3 pt-2">
+                <h3 class="title m-0 mt-1"><i class="fas fa-feather-alt"></i> {{ account?.login }}</h3>
+                <ul class="list-group mb-4 mt-2">
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item" routerLinkActive="active">
+                        <a [routerLink]="['/Account']"  class="nav-link">
+                            <i class="fas fa-user"></i> Compte 
+                        </a>
+                    </li>
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item" routerLinkActive="active">
+                        <a [routerLink]="['/Account/History']"  class="nav-link">
+                            <i class="fas fa-history"></i> Historique
+                        </a>
+                    </li>
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item" routerLinkActive="active">
+                        <a [routerLink]="['/Account/Messaging']"  class="nav-link">
+                            <i class="fas fa-envelope"></i> Messagerie
+                            <!-- BEGIN NEW_MESSAGE -->
+                            <span class="text-success"> [0 New(s)]</span>
+                            <!-- END NEW_MESSAGE -->
+                        </a>
+                    </li>
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item" routerLinkActive="active">
+                        <a [routerLink]="['/Store/Golds']"  class="nav-link">
+                            <i class="fas fa-treasure-chest"></i> Gold(s) {{account?.golds}}
+                        </a>
+                    </li>
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item">
+                        <div  class="nav-link">
+                            <i class="fas fa-file-contract"></i> Inscription le {{ account?.registerDate | date:'medium' }}
+                        </div>
+                    </li>
+                    <li class="bg-warehouse list-group-item d-flex justify-content-between align-items-center nav-item">
+                        <div  class="nav-link">
+                            <!-- BEGIN ONLINE -->
+                            <strong *ngIf="account?.hasOnline; else offline" class="text-success"><i class="fas fa-plug"></i> En ligne</strong>
+                            <!-- END ONLINE -->
+                            <!-- BEGIN OFFLINE -->
+                            <ng-template #offline>
+                                <strong class="text-danger"><i class="far fa-power-off"></i> Hors ligne</strong>
+                            </ng-template>
+                            <!-- END OFFLINE -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 pb-3 pt-2 right">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>
+<ng-template #isNotLogged>
+    <router-outlet></router-outlet>
+</ng-template>

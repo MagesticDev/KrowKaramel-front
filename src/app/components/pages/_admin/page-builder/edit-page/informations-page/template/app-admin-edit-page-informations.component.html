@@ -1,0 +1,270 @@
+<app-loading [hasLoading]="hasLoading"></app-loading>
+<form autocomplete="off" [formGroup]="informations" (ngSubmit)="save(informations)" autocomplete="on"
+    class="row m-0 new-page-info" method="POST">
+    <div class="position-absolute btn-save w-auto">
+        {{ informations.pristine }} {{ informations.untouched }} {{ informations.dirty }}
+        <button type="submit" class="btn btn-success" value="Valider"
+            [disabled]="informations.pristine || (informations.untouched && informations.pristine)">
+            <span>Sauvegarder</span>
+            <div class="back"></div>
+        </button>
+    </div>
+    <div class="col-8 p-0">
+        <div class="bg-warehouse p-3 border mt-2">
+            <input *ngIf="addIdEdit" type="hidden" formControlName="pageId" name="pageId" />
+            <label for="title" class="mt-1">
+                <strong>Titre de la page <span class="text-danger">*</span> :</strong>
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-heading"></i></span>
+                </div>
+                <input type="text" formControlName="title" aria-describedby="titleHelp" class="form-control"
+                    minlength="30" (keyup)="transformTitle($event.target.value)" value="{{valueTitle}}" maxlength="60"
+                    id="title" placeholder="Saisissez un titre pertinent..." required>
+
+                <div *ngIf="informations.controls.title.touched && informations.controls.title.invalid"
+                    class="d-block w-100">
+                    <app-alert [onCloseButton]="false" [type]="'warning'"
+                        [message]="'Longueur minimale : 30 caractères.'"></app-alert>
+                </div>
+
+                <div id="titleHelp" class="form-text text-muted w-100 mt-3 p-1">
+                    <strong>Quel nombre de caractères pour la balise titre ? </strong>
+                    <p class="mt-1">
+                        Sur Google, le nombre de caractères est variable. Lorsque la balise titre est trop longue, ce
+                        premier la tronque dans les résultats de recherche (SERP).
+                    </p>
+                    <p>
+                        Désormais la balise title ne doit pas dépasser 512 pixels soit environ 55 à 65 caractères.
+                        Utilisez les règles suivantes pour optimiser votre balise title :
+                    </p>
+                    <ol>
+                        <li>Longueur maximale : 60 caractères </li>
+                        <li>Longueur minimale : 30 caractères </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="bg-warehouse p-3 border mt-2">
+            <label for="description" class="mt-1">
+                <strong>Description de la page <span class="text-danger">*</span> :</strong>
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend textarea-prepend">
+                    <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                </div>
+                <textarea type="text" formControlName="description" name="description" minlength="160" maxlength="200"
+                    (keyup)="transformDescription($event.target.value)" value="{{valueDescription}}"
+                    aria-describedby="descriptionHelp" class="form-control" id="description"
+                    placeholder="Description de votre page..." required></textarea>
+
+                <div *ngIf="informations.controls.description.touched && informations.controls.description.invalid"
+                    class="d-block w-100">
+                    <app-alert [onCloseButton]="false" [type]="'warning'"
+                        [message]="'Longueur minimale : 160 caractères.'"></app-alert>
+                </div>
+
+                <div id="descriptionHelp" class="form-text text-muted w-100 mt-3 p-1">
+                    <strong>Quel nombre de caractères pour la meta description ? </strong>
+                    <p class="mt-1">
+                        Evitez les meta description trop courtes, car Google ne les utilise pas pour générer les
+                        snippets. La balise meta description doit avoir au moins 50 caractères pour qu’elle ne soit pas
+                        signalée « trop courte » dans Google Search Console.
+                    </p>
+                    <p>
+                        Utilisez les règles suivantes pour optimiser votre meta description :
+                    </p>
+                    <ol>
+                        <li>Longueur maximale : 200 caractères </li>
+                        <li>Longueur minimale : 160 caractères </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="bg-warehouse p-3 border mt-2">
+            <label for="tags" class="mt-1">
+                <strong>Joindre un ou plusieurs documents (facultatif) :</strong>
+            </label>
+            <app-upload-drop [filesList]="documents" (btnSaveDisabled)="getBtn($event)"
+                (getFileDeleted)="getFileDeleted($event)" (filesUpload)="getFiles($event)"></app-upload-drop>
+        </div>
+    </div>
+    <div class="col-4 p-0">
+        <div class="bg-warehouse p-3 border mt-2 ms-2">
+            <label for="hasHeader" class="mt-1">
+                <strong>Header :</strong>
+            </label>
+            <div class="input-group">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" formControlName="hasHeader" name="hasHeader"
+                        class="form-check-input mb-0 position-relative ms-0" id="hasHeader">
+                    <label for="hasHeader" class="ms-2">
+                        Faire apparaitre le titre et la description sur la page ?
+                    </label>
+                </div>
+            </div>
+            <label for="hasMenuItem" class="mt-1">
+                <strong>Choisir une url <span class="text-danger">*</span> :</strong>
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-bars"></i></span>
+                </div>
+                <input formControlName="url" type="text" name="url" aria-describedby="urlHelp"
+                    onkeydown="if(event.keyCode==32) return false" (keyup)="transformUrl($event.target.value)"
+                    value="{{ valueUrl }}" (paste)="onPaste($event)" aria-describedby="urlHelp" class="form-control"
+                    minlength="3" maxlength="8" id="url" placeholder="Saisir le nom de l'url..." required>
+
+                <div *ngIf="informations.controls.url.touched && informations.controls.url.invalid"
+                    class="d-block w-100">
+                    <app-alert [onCloseButton]="false" [type]="'warning'"
+                        [message]="'Longueur minimale : 3 caractères.'"></app-alert>
+                </div>
+
+                <div id="descriptionHelp" class="form-text text-muted w-100 mt-3 p-1">
+                    <strong> Utilisez les règles suivantes pour optimiser votre label : </strong>
+                    <ol>
+                        <li>Longueur maximale : 8 caractères </li>
+                        <li>Longueur minimale : 3 caractères </li>
+                        <li>Ne doit pas comprendre d'espace</li>
+                    </ol>
+                </div>
+            </div>
+            <label for="hasMenuItem" class="mt-1">
+                <strong>Menu :</strong>
+            </label>
+            <div class="input-group">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" formControlName="hasMenuItem" name="hasMenuItem"
+                        class="form-check-input mb-0 position-relative ms-0" id="hasMenuItem">
+                    <label for="hasMenuItem" class="ms-2">
+                        Apparaît dans le menu ?
+                    </label>
+                </div>
+                <div id="hasMenuItemHelp" class="form-text text-muted w-100 mt-0 p-1">
+                    <strong> La page peut être ajouté dans le menu via l'administration </strong>
+                </div>
+            </div>
+            <div *ngIf="informations.value.hasMenuItem">
+                <label for="labelMenu" class="mt-1">
+                    <strong>Label <span class="text-danger">*</span> :</strong>
+                </label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                    </div>
+                    <input formControlName="labelMenu" type="text" name="labelMenu" aria-describedby="descriptionHelp"
+                        aria-describedby="labelMenuHelp" class="form-control" minlength="5" maxlength="15"
+                        (keyup)="transformTitleLabel($event.target.value)" value="{{valueTitleLabel}}" id="labelMenu"
+                        placeholder="Saisissez le label (Titre du lien)..." required>
+
+                    <div *ngIf="informations.controls.labelMenu.touched && informations.controls.labelMenu.invalid"
+                        class="d-block w-100">
+                        <app-alert [onCloseButton]="false" [type]="'warning'"
+                            [message]="'Longueur minimale : 5 caractères.'"></app-alert>
+                    </div>
+
+                    <div id="descriptionHelp" class="form-text text-muted w-100 mt-3 p-1">
+                        <strong> Utilisez les règles suivantes pour optimiser votre label : </strong>
+                        <ol>
+                            <li>Longueur maximale : 15 caractères </li>
+                            <li>Longueur minimale : 5 caractères </li>
+                        </ol>
+                    </div>
+                </div>
+                <label for="iconMenu" class="mt-1">
+                    <strong>Choisir une icône <span class="text-danger">*</span> :</strong>
+                </label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                    </div>
+                    <input formControlName="iconMenu" id="iconMenu" name="iconMenu"
+                        placeholder="Cliquez pour choisir une icone" type="text" class="form-control" required>
+                    <div class="icon-click-input" (click)="toggleDisplayDivListIcons()"></div>
+                    <div *ngIf="informations.value.iconMenu" class="border p-2 mt-2 w-100 d-flex align-items-center">
+                        <strong>Icône sélectionné : <i class="{{informations.value.iconMenu}}"></i></strong>
+                    </div>
+                    <div *ngIf="isShowDivListIcons" class="w-100 mt-2 border p-1 d-flex flex-wrap">
+                        <div *ngFor="let icon of icons" class="p-1 icon-click">
+                            <i (click)="choiceIcon(icon)" class="{{icon}}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-warehouse p-3 border mt-2 ms-2">
+            <label class="mt-1">
+                <strong>Status :</strong>
+            </label>
+            <div class="input-group">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" formControlName="hasPublished" name="hasPublished"
+                        class="form-check-input mb-0 position-relative ms-0" id="published">
+                    <label for="published" class="ms-2">
+                        Apparaît comme publié ?
+                    </label>
+                </div>
+                <div id="publishedHelp" class="form-text text-muted w-100 mt-0 p-1">
+                    <strong> La page pourra être publiée via l'administration </strong>
+                    <br />
+                    celle-ci ne pourra être vu que par les administrateurs le temps que'elle soit publié.
+                </div>
+            </div>
+            <label for="rightPageAccess" class="mt-2">
+                <strong>Accès à la page uniquement par :</strong>
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <select formControlName="rightPageAccess" class="form-control" id="rightPageAccess"
+                    name="rightPageAccess">
+                    <option [ngValue]="0" selected>Tout le monde</option>
+                    <option [ngValue]="1">Utilisateurs connectés (comprend aussi les administrateurs)</option>
+                    <option [ngValue]="2">Administrateur</option>
+                </select>
+            </div>
+            <label class="mt-2">
+                <strong>Publication (autre) :</strong>
+            </label>
+            <div class="input-group">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" formControlName="hasDepublished" name="hasDepublished"
+                        aria-describedby="hasDepublishedHelp" class="form-check-input mb-0 position-relative ms-0"
+                        id="hasDepublished">
+                    <label for="hasDepublished" class="ms-2">
+                        La page sera-t-elle de-publiée après avoir été publié ?
+                    </label>
+                </div>
+                <div id="hasDepublishedHelp" class="form-text text-muted w-100 mt-0 p-1">
+                    <strong> La page pourra être publiée de nouveau via l'administration </strong>
+                </div>
+                <div *ngIf="informations.value.hasDepublished" class="mt-2 w-100">
+                    <label for="hasDpublishedDate">
+                        Quand sera-t-elle depubliée ? <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group position-relative flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                        </div>
+
+                        <input formControlName="hasDepublishedDate" type="date" name="hasDepublishedDate"
+                            class="form-control w-100" id="hasDepublishedDate" ngbDatepicker #d="ngbDatepicker"
+                            required />
+                        <button class="btn-calendar" (click)="d.toggle()" type="button">
+                            <i class="fas fa-calendar-day"></i>
+                        </button>
+                        <div *ngIf="informations.controls.hasDepublishedDate.touched && informations.controls.hasDepublishedDate.invalid"
+                            class="d-block w-100">
+                            <app-alert [onCloseButton]="false" [type]="'warning'"
+                                [message]="'Le champ doit être un type date'"></app-alert>
+                        </div>
+                        <div class="position-absolute mask-input"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

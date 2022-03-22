@@ -1,0 +1,9 @@
+.ck-content .row {
+  
+  width:100%;
+}
+
+.ck-content .row > .col-sm {
+  border: 1px dotted #e6e6e6;
+}
+

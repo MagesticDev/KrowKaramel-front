@@ -1,0 +1,22 @@
+<!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    Link with href
+</a> -->
+<div class="offcanvas {{ options?.position }}" [attr.data-bs-backdrop]="options?.backdrop" [attr.data-bs-scroll]="options?.scroll" tabindex="-1" id="{{options?.id}}" [attr.aria-labelledby]="options?.id + 'Label'">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="{{ options?.id }}Label">{{ options?.title }}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            {{ options?.description }}
+        </div>
+        <ng-content></ng-content>
+    </div>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+#tabs {
+    & .nav-pills > li > a {
+        border-radius: 0;
+    }
+    
+    & .tab-content {
+        padding : 15px 0 0 0;
+        min-height: 75vh;
+    }
+
+    & .btn-editor {
+        & :disabled {
+            background:#e1e0e0;
+            color: #afacac;
+        }
+    }
+
+    & .nav-link {
+        padding:10px 0;
+        margin-top:15px;
+        font-size:14px;
+        margin-right:10px;
+        width:100px;
+        text-align: center;
+        border: unset;
+        border-radius: 0;
+        &:focus {
+            outline:none
+        }
+        &.active {
+            background: #375C8C 
+        }
+        &:not(.active):not(:disabled) {
+            background: #1b3a63;
+            color:#ffffff;
+            transition: 0.3;
+            &:hover {
+                background: #375C8C;
+            }
+        }
+
+    }
+
+}

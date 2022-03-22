@@ -1,0 +1,51 @@
+<div class="admin-index">
+    <div *ngFor="let list of weatherList; let i = index" id="carouselCaptions" class="carousel slide col-4"
+        data-bs-ride="carousel">
+        <div *ngIf="i === 0">
+            <!-- <ol class="carousel-indicators">
+                <li *ngFor="let slider of list; let i = index" data-bs-target="#carouselCaptions"
+                    attr.data-bs-slide-to="{{i}}" class="{{ (i == 0) ? 'active' : '' }}"></li>
+            </ol> -->
+            <div class="carousel-inner">
+                <div class="carousel-item row col-12" *ngFor="let data of list; let i = index"
+                    class="carousel-item {{ (i == 0) ? 'active' : '' }}">
+                    <div class="card col-12 w-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{globalInfoWeather?.city?.name}} -
+                                {{globalInfoWeather?.city?.country}}</h5>
+                            <h6 class="card-title">Météo du {{ data?.dt_txt | date:'mediumDate' }} [{{ data?.dt_txt |
+                                date:'shortTime' }}] (Aujourd'hui)</h6>
+                            <p class="card-text">
+                                <img src="https://openweathermap.org/img/wn/{{data?.weather[0]?.icon}}.png" alt=""
+                                    class="icon" />
+                                {{data?.weather[0]?.description}}
+                            </p>
+                            <div class="card-subtitle mb-2 text-muted">
+                                <div class="row">
+                                    <div class="col-5 text-right">Température :</div>
+                                    <div class="col-7 bg-primary text-white">
+                                        <span>{{data?.main?.temp | number : '1.0-0'}}°C</span>
+                                    </div>
+                                </div>
+                                <div class="row d-flex mt-1">
+                                    <div class="col-5 text-right">Humidité :</div>
+                                    <div class="col-7 bg-primary text-white">
+                                        <span>{{data?.main?.humidity | number : '1.0-0'}}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselCaptions" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</div>

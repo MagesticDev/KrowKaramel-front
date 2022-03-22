@@ -1,0 +1,207 @@
+<section class="todo d-flex" *ngIf="headerdata">
+  <div>
+    
+    <ejs-kanban keyField='Status' #kanbanObj [swimlaneSettings]='swimlaneSettings' locale='fr'
+      cssClass='kanban-header-template' [dataSource]='tasks' [cardSettings]='cardSettings' [sortSettings]="sortSettings"
+      [AddCard]="cardSettings"
+      (actionComplete)='onActionComplete($event)'>
+      <e-columns>
+        <e-column *ngFor="let data of headerdata" headerText='{{data?.headerText}}' keyField='{{data?.field}}'
+          allowToggle='true'>
+          <ng-template #template let-data>
+            <div class="header-template-wrap" [style.background]="getBackground(data.keyField)">
+              <div class="header-text">
+                {{data?.headerText}}
+                <span style="color:#1b3a63; display:flex">{{data?.count}} item
+                  <span *ngIf="data?.count > 1">s</span>
+                </span>
+              </div>
+            </div>
+          </ng-template>
+        </e-column>
+      </e-columns>
+      <ng-template #dialogSettingsTemplate let-tasks>
+        <table>
+          <tbody>
+            <tr>
+              <td class="e-label">ID</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <input id="Id" name="Id" type="text" class="e-field" value='{{tasks.Id}}' disabled />
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="headerdata">
+              <td class="e-label">Status</td>
+              <td>
+                <ejs-dropdownlist id='Status' #dropdownStatus name="Status" class="e-field" [dataSource]='headerdata'
+                  [value]='tasks?.Status' placeholder='Status' [fields]='fieldsStatus'>
+                </ejs-dropdownlist>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Assignée</td>
+              <td>
+                <ejs-dropdownlist id='Assignee' #dropdownAssignee name="Assignee" class="e-field"
+                  [dataSource]='adminList' [value]='tasks?.Assignee' placeholder='Assignee' [fields]='fieldsAssignee'>
+                </ejs-dropdownlist>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Titre</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <input id="Title" name="Title" type="text" class="e-field" value='{{tasks.Title}}' />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Description</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <textarea type="text" name="Summary" id="Summary" class="e-field"
+                    value='{{tasks.Summary}}'></textarea>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Priorité</td>
+              <td>
+                <ejs-dropdownlist type="text" name="Priority" id="Priority" class="e-field" placeholder='Priority'
+                  [dataSource]='tasksPriority' [value]='tasks.Priority' [fields]='fieldsPriority'></ejs-dropdownlist>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Couleur</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <input id="Color" #textBoxTitle name="Color" type="text" class="e-field" value='{{tasks.Color}}' />
+                  <input id="element" ejs-colorpicker mode="Palette" type='color' value='{{tasks.Color}}'
+                    (change)="tasks.Color = $event.target.value" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Date début</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <input id="StartTask" #textBoxStartTask name="StartTask" type="date" class="e-field"
+                    value="{{tasks.StartTask | date: 'yyyy-MM-dd'}}" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Date fin</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <input id="EndTask" #textBoxEndTask name="EndTask" type="date" class="e-field"
+                    value="{{tasks.EndTask | date: 'yyyy-MM-dd'}}" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-label">Tags</td>
+              <td>
+                <div class="e-float-input e-control-wrapper">
+                  <textarea type="text" name="Tags" id="Tags" class="e-field" value='{{tasks.Tags}}'></textarea>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+      <ng-template #cardSettingsTemplate let-tasks>
+        <div class='e-card-content'>
+          <div class="card-template-wrap"
+            [ngStyle]="{'border-start': (tasks?.Color ? tasks?.Color : 'transparent') + ' 4px solid' }">
+            <div class="e-card-header">
+              <div class="e-card-header-caption">
+                <div class="e-card-header-title">{{tasks?.Title}}</div>
+              </div>
+            </div>
+            <div class="e-card-content">
+              {{tasks?.Summary}}
+              <hr />
+              <div class="e-card-priority"
+                [ngStyle]="{'background': (tasks?.PriorityColor ? tasks?.PriorityColor  : ' #4971a6')}">
+                {{tasks?.PriorityLabel}}
+              </div>
+              <div class="p-1 border mt-1 mb-1 card-timer">
+                <div class="e-float-input e-control-wrapper">
+                  <label>Date début :</label>
+                  <input value="{{tasks.StartTask | date: 'yyyy-MM-dd'}}" disabled />
+                </div>
+                <div class="e-float-input e-control-wrapper">
+                  <label>Date fin :</label>
+                  <input value="{{tasks.EndTask | date: 'yyyy-MM-dd'}}" disabled />
+                </div>
+              </div>
+              <hr />
+            </div>
+
+            <div class="e-card-tags">
+              <div class="e-card-tag e-card-label">{{tasks?.Tags}}</div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ejs-kanban>
+  </div>
+  <div class="col-lg-3 property-section panel">
+    <div class="property-panel-section">
+      <div class="property-panel-header">Propriétés</div>
+      <div class="property-panel-content">
+        <div id="property" class="property-panel-table" title="Properties">
+          <table id="property" title="Properties">
+            <tr>
+              <td class="e-constraint-label">
+                <div>Trier par</div>
+              </td>
+              <td>
+                <div>
+                  <ejs-dropdownlist id="sortBy" #sortBy [dataSource]='sortByData' (change)='change($event)'
+                    [fields]='fields' index=1></ejs-dropdownlist>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-constraint-label">
+                <div>Champ</div>
+              </td>
+              <td>
+                <div>
+                  <ejs-dropdownlist id="field" #field [dataSource]='fieldData' index=0 [enabled]='false'>
+                  </ejs-dropdownlist>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-constraint-label">
+                <div>Direction</div>
+              </td>
+              <td>
+                <div>
+                  <ejs-dropdownlist id="direction" #direction [dataSource]='directionData' index=0>
+                  </ejs-dropdownlist>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="e-constraint-label" style="padding: 10px">
+                <button ejs-button id="sort" class="e-btn" (click)="sortClick()">Sort</button>
+              </td>
+              <td style="padding: 10px">
+                <button ejs-button id="clear" class="e-btn" (click)="clearClick()">Clear</button>
+              </td>
+            </tr>
+            <tr>
+                <td>
+                    <button ejs-button id='addNew' class="e-btn" (click)="addClick()">Add New Card</button>
+                </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

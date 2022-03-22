@@ -1,0 +1,68 @@
+.todo {
+    .header-template-wrap {
+        background: #4971a6;
+        color: #fff;
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #1b3a63;
+        position:relative;
+    }
+
+    ::ng-deep .e-kanban .e-kanban-header .e-header-cells.e-toggle-header .e-column-expand {
+        position: absolute;
+        right: 35px;
+        transform: translate(50%, 50%);
+        color: #fff;
+        transition: .2;
+        &:hover, &:active, &:focus {
+            background: #1b3a63;
+            color: #fff;
+        }
+    }
+
+    ::ng-deep .e-kanban .e-kanban-header .e-header-cells.e-toggle-header .e-column-collapse {
+        border-radius: 100%;
+        background: #1b3a63;
+        color: #fff;
+        transition: .2;
+        &:hover, &:active, &:focus {
+            background: #4971a6;
+        }
+    }
+
+    .e-card-priority {
+        margin-top:10px;
+        text-align: center;
+        font-size:10px;
+        color:#fff;
+    }
+
+    .card-timer {
+        .e-float-input, .e-float-input.e-control-wrapper {
+            line-height: 0;
+            margin-top: 5px;
+        }
+
+        .e-float-input, .e-float-input.e-control-wrapper {
+            font-size:10px;
+        }
+
+        label {
+            font-size:10px;
+        }
+    }
+
+    .panel {
+        height:100vh;
+        background:#ffffff;
+        border-left:2px solid #1b3a63;
+        padding: 35px 20px;
+        .property-panel-header {
+            font-size:15px;
+            font-weight: bold;
+            border-bottom: 1px solid black;
+            padding-bottom:15px;
+            margin-bottom:25px;
+        }
+    }
+}

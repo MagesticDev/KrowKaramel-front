@@ -1,0 +1,17 @@
+<app-page-admin-container>
+    <section class="forum">
+        <div class="title w-100 d-flex justify-content-between align-items-center">
+            <h1 class="w-100 m-0"><i class="fas fa-feather-alt"></i> Page builder</h1>
+            <div class="d-flex">
+                <div data-bs-toggle="modal" data-bs-target="#settings" routerLink="/Administration/Page/New" (click)="hasEditAndNewPage(true)" class="btn btn-success">
+                    <span>Créer une nouvelle page</span><div class="back"></div>
+                </div>
+                <div data-bs-toggle="modal" data-bs-target="#settings" class="btn btn-info">
+                    <span>Paramètres des pages</span><div class="back"></div>
+                </div>
+            </div>
+        </div>
+        <app-table [columns]="columns" [currentUrl]="'/Administration/Page/'" [filterColumns]="filterColumns" [data]="pages" [attrColumn]="attrColumn" [btnActions]="true"></app-table>
+    </section>
+</app-page-admin-container>
+

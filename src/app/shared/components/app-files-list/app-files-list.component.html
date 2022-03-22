@@ -1,0 +1,15 @@
+<div class="document-left-list">
+    <div class="bg-white document-left-list-second p-0 mt-3">
+        <div class="row p-0">
+            <div class="col-lg-6 text-center mt-1"  *ngFor="let file of files; let index = index; let isFirst = first;">
+                <a [href]="downloadFilePath(file)" target="_blank" [download]="file?.name" class="document-list border">
+                    <mat-icon class="icon" svgIcon="{{ getFindIcon(icons, file.ext) }}"></mat-icon>
+                    <div class="m-0 p-2 bg-danger text">
+                        <p class="text-white p-0 m-0"> {{file?.name}} </p>
+                        <p class="text-white p-0 m-0">{{ formatBytes(file?.size, 0) }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
