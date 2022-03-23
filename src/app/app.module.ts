@@ -27,6 +27,7 @@ import { PagesBuilderComponent } from './components/pages/pagesBuilder/app-pages
 import { UrlsPagesService } from './core/services/pages/urls.service';
 import {Injector} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module'; 
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PodcastModule,
     SupportModule,
     SharedModule,
+    QRCodeModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

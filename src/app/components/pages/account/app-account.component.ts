@@ -11,14 +11,15 @@ import { UserService } from 'src/app/core/services/user.service';
 export class AccountComponent implements OnInit {
     public account: IAccountUser;
     public hasLoading = true;
-    constructor(private userService: UserService, private sharedService: SharedService){
-        this.sharedService.changeEmitted$.subscribe(account => { this.account = account; this.hasLoading = false; });
-        if(!this.account){
-            this.userService.getAccount().subscribe(account => {
+    constructor(private userService: UserService, private sharedService: SharedService) {
+        this.sharedService.changeEmitted$.subscribe(
+            account => {
                 this.account = account;
                 this.hasLoading = false;
-            });
-        }
+            }
+        );
     }
-    ngOnInit() {}
+    ngOnInit() { 
+        this.hasLoading = false;
+    }
 }

@@ -1,1 +1,1 @@
-export const URL_API = "http://magestic-api.test";
+export const URL_API = "http://workshop.test";

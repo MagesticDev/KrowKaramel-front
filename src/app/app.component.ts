@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   private refreshLogin;
   public account: IUser;
   public accountDetail: IUser;
+  public myAngularxQrCode: string = null;
 
   @Output()
   public isLogged = new EventEmitter<boolean>();
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
     private mainService: MainService,
     private sharedService: SharedService
   ) {
-
+    this.myAngularxQrCode = 'Your QR code data string';
     this.mainService.loadModules().then((result: IModules[]) => {
       this.modules = result
       // Partie module activable via le backend
